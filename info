@@ -1,0 +1,16 @@
+npm init -y
+
+
+npm install typescript --save
+npm install @types/node --save
+
+npx tsc --init
+
+npm install express --save
+npm install @types/express --save
+
+npm i cors --save
+npm i --save-dev @types/cors
+
+npm i mongoose --save
+npm i @types/mongoose --save-dev
