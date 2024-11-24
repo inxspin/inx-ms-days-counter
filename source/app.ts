@@ -3,21 +3,16 @@ import cors from 'cors';
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-const port = process.env.PORT || 3003;
+const port = process.env.PORT || 80;
 
 // heartbeat
 app.get('/', (req, res) => {
 	res.status(200).json({message: 'Its working!'})
 });
 
-// database
-import database from './configs/database';
-database.connectDB();
-
-
 // routes
-
+import daysRoutes from './routes/days.routes'
+app.use('/api/v1/', daysRoutes);
 
 // server
 app.listen(port, () => {

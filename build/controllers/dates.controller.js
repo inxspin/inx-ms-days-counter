@@ -12,12 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    mongoose_1.default.connect('mongodb://127.0.0.1:27017/snm-node-react', {}).then(() => {
-        console.log('Database connection success');
-    }).catch((e) => {
-        console.log('Database connection failed: ' + e);
-    });
+const date_service_1 = __importDefault(require("../services/date.service"));
+const days = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const customResponse = yield date_service_1.default.get_days_within_date_range(req.body);
+    res.status(customResponse['code']).json(customResponse);
 });
-exports.default = { connectDB };
+exports.default = { days };

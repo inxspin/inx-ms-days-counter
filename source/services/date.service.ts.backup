@@ -1,0 +1,84 @@
+// import DatesInputFormatInterface from '../interfaces/datesInputFormatInterface';
+import moment from 'moment';
+
+interface monthDaysMapperInterface {
+  "1": number;
+  "2": number;
+  "3": number;
+  "4": number;
+  "5": number;
+  "6": number;
+  "7": number;
+  "8": number;
+  "9": number;
+  "10": number;
+  "11": number;
+  "12": number;
+};
+
+const MONTH_DAYS_MAPPER: monthDaysMapperInterface = {
+  "1": 31,
+  "2": 28,
+  "3": 31,
+  "4": 30,
+  "5": 31,
+  "6": 30,
+  "7": 31,
+  "8": 31,
+  "9": 30,
+  "10": 31,
+  "11": 30,
+  "12": 31
+};
+
+const get_days_within_date_range = async (data: any) => {
+  try {
+    const {startDate, endDate, includeStartDate, includeEndDate} = data;
+
+    const startDateData = startDate.split("-");
+    let startDateDay = Number(startDateData[0]);
+    let startDateMonth = Number(startDateData[1]);
+    let startDateYear = Number(startDateData[2]);
+
+    const endDateData = endDate.split("-");
+    let endDateDay = Number(endDateData[0]);
+    let endDateMonth = Number(endDateData[1]);
+    let endDateYear = Number(endDateData[2]);
+
+    let startDateYearVariable = Number(startDateYear);
+    let endDateYearVariable = Number(endDateYear);
+    let monthInitializer = true;
+    let final_total_days = 0;
+    for(let year=startDateYearVariable; year<=endDateYearVariable; year++){
+      for(let month=startDateMonth; month<=12; month++){
+        let total_days = 0;
+        let num_of_days_in_month = Number(MONTH_DAYS_MAPPER[String(month) as keyof monthDaysMapperInterface]);
+        // its start day
+        if(monthInitializer){
+          total_days = num_of_days_in_month - startDateDay;
+        }else{
+          total_days = num_of_days_in_month;
+        }
+
+        if(month == endDateMonth){
+          if(year == endDateYear){
+            total_days = endDateDay;
+          }else{
+            total_days = num_of_days_in_month;
+          }
+        }
+
+        monthInitializer = false;
+        final_total_days = final_total_days + total_days;
+        if(month==endDateMonth && year == endDateYear){
+          break;
+        }
+      }
+    }
+    return {code: 200, status: "success", final_total_days: final_total_days, message: "success"}
+  }catch(e: any){
+    return {code: 422, status: "failed", message: e.message};
+  }
+};
+
+export default {get_days_within_date_range};

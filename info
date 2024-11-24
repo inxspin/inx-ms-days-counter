@@ -1,16 +1,43 @@
 npm init -y
 
 
-npm install typescript --save
-npm install @types/node --save
+npm i typescript --save
+npm i @types/node --save
 
 npx tsc --init
 
-npm install express --save
-npm install @types/express --save
+npm i express --save
+npm i @types/express --save
 
 npm i cors --save
 npm i --save-dev @types/cors
 
 npm i mongoose --save
 npm i @types/mongoose --save-dev
+
+
+npm i bcrypt --save
+npm i @types/bcrypt --save-dev
+
+
+npm i jsonwebtoken --save
+npm i @types/jsonwebtoken --save-dev
+
+npm i redis --save
+npm i @types/redis --save-dev
+
+npm i moment --save
+
+
+// Date calculation
+
+curl -X POST -H 'Content-Type: application/json' -d '{"startDate": "01-01-2024", "endDate": "01-05-2024", "includeStartDate":"yes", "includeEndDate":"yes"}' http://localhost/api/v1/days
+
+curl -X POST -H 'Content-Type: application/json' -d '{"startDate": "01-01-2024", "endDate": "20-01-2024", "includeStartDate":"yes", "includeEndDate":"yes"}' http://localhost/api/v1/days
+curl -X POST -H 'Content-Type: application/json' -d '{"startDate": "01-01-2024", "endDate": "31-12-2024", "includeStartDate":"yes", "includeEndDate":"yes"}' http://localhost/api/v1/days
+curl -X POST -H 'Content-Type: application/json' -d '{"startDate": "01-01-2024", "endDate": "01-01-2025", "includeStartDate":"yes", "includeEndDate":"yes"}' http://localhost/api/v1/days
+
+
+curl -X POST -H 'Content-Type: application/json' -d '{"startDate": "01-01-2024", "endDate": "01-01-2025", "includeStartDate":"no", "includeEndDate":"no"}' http://localhost/api/v1/days
+
+curl -X POST -H 'Content-Type: application/json' -d '{"startDate": "01-01-2024", "endDate": "31-12-2024", "includeStartDate":"no", "includeEndDate":"no"}' http://localhost/api/v1/days
